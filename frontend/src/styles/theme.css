@@ -1,0 +1,235 @@
+/* Light theme variables */
+:root {
+  --bg-color: #f9f9f9;
+  --text-color: #333;
+  --primary-color: #4a90e2;
+  --nav-bg: #ffffff;
+  --card-bg: #ffffff;
+  --input-bg: #fff;
+  --input-border: #ccc;
+  --btn-bg: var(--primary-color);
+  --btn-text: white;
+
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-heading: 'Segoe UI Semibold', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Dark theme variables */
+[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #e4e4e4;
+  --primary-color: #3399ff;
+  --nav-bg: #1f1f1f;
+  --card-bg: #222;
+  --input-bg: #333;
+  --input-border: #555;
+  --btn-bg: var(--primary-color);
+  --btn-text: white;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+  color: darken(var(--primary-color), 10%);
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-family: var(--font-family);
+  box-shadow: 0 3px 6px rgba(74, 144, 226, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover,
+button:focus {
+  background-color: #3b7cc2;
+  box-shadow: 0 6px 12px rgba(74, 144, 226, 0.7);
+  outline: none;
+}
+
+input,
+select,
+textarea {
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  padding: 10px 12px;
+  border-radius: 6px;
+  width: 100%;
+  margin: 8px 0 16px 0;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 1rem 2rem;
+  background-color: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--text-color);
+  user-select: none;
+}
+
+/* Navbar links container to centrally align them evenly spaced */
+.navbar .nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-grow: 1;
+}
+
+.navbar a {
+  color: var(--text-color);
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+  background-color: var(--primary-color);
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Responsive hamburger icon visible on xs screen */
+.navbar .MuiSvgIcon-root {
+  display: none;
+}
+
+/* Buttons on right side */
+.navbar > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Cards */
+.card {
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* Flex utilities */
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.flex-col {
+  flex: 1;
+  min-width: 280px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1.8rem 1rem;
+  background-color: var(--nav-bg);
+  border-top: 1px solid var(--input-border);
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+footer a {
+  margin: 0 1.3rem;
+  color: var(--text-color);
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
+}
+
+footer a:hover,
+footer a:focus {
+  color: var(--primary-color);
+  outline: none;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .navbar .nav-links {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .navbar .nav-links {
+    display: none;
+  }
+  .navbar .MuiSvgIcon-root {
+    display: block;
+  }
+  .flex-row {
+    flex-direction: column;
+  }
+}
+
+.MuiBackdrop-root {
+  backdrop-filter: blur(6px);
+}
