@@ -124,31 +124,6 @@ YourBooks/
 ```
 ---
 
-## Database Setup
-
-### MongoDB Configuration
-1. **Install MongoDB**
-   - Download and install MongoDB Community Server from [MongoDB Website](https://www.mongodb.com/try/download/community)
-   - Or use MongoDB Atlas for cloud hosting
-
-2. **Database Structure**
-   - Database Name: `booklib`
-   - Collections:
-     - `users` - User accounts and authentication
-     - `books` - Book entries with user references
-
-3. **Connection**
-   - Local URL: `mongodb://localhost:27017/booklib`
-   - Configure in `.env` file (see Environment Setup)
-
-### Environment Setup
-Create `.env` file in Backend directory:
-```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/booklib
-JWT_SECRET=your_secure_jwt_secret
-```
-
 ## 🛠️ Setup Instructions
 
 Clone the repo and install dependencies for each part—these steps make everything work smoothly:
