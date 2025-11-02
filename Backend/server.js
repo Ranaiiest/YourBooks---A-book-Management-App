@@ -8,7 +8,7 @@ const app = express();
 connectDB();
 
 const corsOptions = {
-  origin: 'https://your-books-a-book-management-app.vercel.app/',
+  origin: process.env.FRONTEND_URL,
   // i want to print the value of origin to the console
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
@@ -22,5 +22,5 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/books', require('./routes/books'));
 
-const PORT = 5000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
