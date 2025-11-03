@@ -9,8 +9,8 @@ YourBooks is a sleek, modern web application for book lovers. Effortlessly manag
 
 ## 🟢 Live Link
 
-[Click here to visit YourBooks live](#)  
-<!-- Paste your Vercel/Netlify/live URL here -->
+[👉 Click Me to Visit the App](https://your-books-a-book-management-app.vercel.app/)
+
 
 ---
 
@@ -146,7 +146,35 @@ npm install
 cd frontend
 npm install
 ```
-### 3️⃣ Run the Application
+### 3️⃣ Setup Environment Variables & MongoDB Atlas
+
+#### 🗄️ Create a MongoDB Atlas Account
+1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register) and **create a free account**.  
+2. After signing in, click **“Build a Database”** → choose the **Free (M0)** tier.  
+3. Select your **cloud provider** (e.g., AWS) and **region** closest to you.  
+4. Create a **cluster** and wait for the setup to finish.  
+5. Once created, go to the **Database → Connect** section.  
+6. Choose **“Connect your application”** and copy the **connection string** (it looks like this):  mongodb+srv://<username>:<password>@cluster0.xxxxxx.mongodb.net/?retryWrites=true&w=majority
+
+#### ⚙️ Create a `.env` File in Backend
+
+Inside your **Backend** directory, create a file named `.env` and add the following environment variables:
+```
+MONGO_URI=your_mongodb_connection_string_here
+JWT_SECRET=your_jwt_secret_key
+FRONTEND_URL=http://localhost:3000
+PORT=5000
+```
+
+#### ⚙️ Create a `.env` File in Frontend
+Inside your **frontend** directory, create a file named `.env` and add the following environment variable:
+```
+REACT_APP_API_BASE_URL=http://localhost:5000/api
+```
+
+✅ Once done, your backend and frontend will both have the necessary environment configurations to connect properly to MongoDB and your APIs.
+
+### 4️⃣ Run the Application
 
 #### 🚀 Start the Backend Server
 ```
