@@ -9,7 +9,7 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import logo from '../assets/logo.png';
 
-const Navbar = () => {
+const Navbar = () => {   
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { isLoggedIn, logout } = useContext(AuthContext);
   const [mobileOpen, setMobileOpen] = React.useState(false);

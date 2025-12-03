@@ -21,7 +21,7 @@ router.post('/', auth, async (req, res) => {
       link,
     });
     const book = await newBook.save();
-    res.json(book);
+    res.json(book); // send the newly created book as response but it is of no use currently
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -41,7 +41,7 @@ router.get('/', auth, async (req, res) => {
   if (_id) filter._id = _id; // allow to fetch single book by id (for BookForm edit)
   try {
     const books = await Book.find(filter).sort({ createdAt: -1 });
-    res.json(books);
+    res.json(books); 
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -86,7 +86,7 @@ router.put('/:id', auth, async (req, res) => {
 
     await book.save();
 
-    res.json(book);
+    res.json(book); // send the updated book as response 
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

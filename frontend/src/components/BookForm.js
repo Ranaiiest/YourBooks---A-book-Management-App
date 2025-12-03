@@ -2,8 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from '../api/api';
 
+// this useQuery hook helps to parse query parameters from the URL
+// here, it is used to get the book ID when editing an existing book
 const useQuery = () => new URLSearchParams(useLocation().search);
+// useLocation is a hook from react-router-dom that returns the current location object
+// the location object represents where the app is currently
+// it contains information about the URL, including the pathname, search parameters, and hash
+// here, we use useLocation to access the search part of the URL
+// which contains the query parameters (like ?id=123)
+// then, we create a new URLSearchParams object with that search string
+// this allows us to easily retrieve the value of specific query parameters using the get method  
 
+// Overview:
+//-----------
+// BookForm component allows adding a new book or editing an existing one
+// it manages form state and handles form submission
+// depending on whether a book ID is present in the URL query parameters
+// it either creates a new book or updates an existing one
+
+// the data fields managed by the form include title, author, genre, rating, note, and link
 const BookForm = () => {
   const [formData, setFormData] = useState({
     title: '',
@@ -14,8 +31,27 @@ const BookForm = () => {
     link: '',
   });
   const navigate = useNavigate();
-  const query = useQuery();
+  const query = useQuery(); // custom hook to parse query parameters
   const bookId = query.get('id');
+
+
+// Q. why use useEffect here? what it doing here?
+/*
+the useEffect hook is used here to fetch the existing book data from the server
+when the component mounts, but only if a bookId is present in the URL query parameters.
+here, component mounting refers to the initial rendering of the BookForm component 
+in the React application.
+if a bookId is found, it indicates that the user intends to edit an existing book rather 
+than add a new one.
+the useEffect hook runs the fetchBook function, which makes an API call to retrieve the
+book data based on the bookId.
+once the data is fetched successfully, it populates the form fields with the existing book
+details by updating the formData state.
+this allows the user to see the current values of the book they are editing and make changes 
+as needed.
+but if no bookId is present, the useEffect hook does nothing, and the form remains empty,
+ready for the user to input details for a new book.
+*/
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -39,10 +75,32 @@ const BookForm = () => {
     fetchBook();
   }, [bookId]);
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+// Q. what is onChange doing here?
+/*
+the onChange function is an event handler that updates the formData state
+when the user types into any of the form input fields.
+it extracts the name and value of the input field that triggered the event
+and uses them to update the corresponding property in the formData state object.
+this ensures that the component's state always reflects the current values entered
+by the user in the form fields.
+*/
+const onChange = (e) => {
+  const { name, value } = e.target; // here the name corresponds to the form field name
+  // and value is the current value of that field
+  setFormData((prev) => ({ ...prev, [name]: value }));
+  // we can write it like this also
+  // setFormData({ ...formData, [e.target.name]: e.target.value });
+};
+
+// Q. what is onSubmit doing here?
+/*
+the onSubmit function is an event handler that manages the form submission process. 
+it prevents the default form submission behavior, then checks if a bookId is present.
+if a bookId exists, it sends a PUT request to update the existing book with the current
+formData; if not, it sends a POST request to create a new book.
+upon successful submission, it navigates the user back to the dashboard.
+if an error occurs during the API call, it alerts the user that the save operation failed.
+*/
 
   const onSubmit = async (e) => {
     e.preventDefault();

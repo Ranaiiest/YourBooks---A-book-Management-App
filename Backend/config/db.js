@@ -13,5 +13,11 @@ const connectDB = async () => {
     process.exit(1);
   }
 };
+// here the connectDB function establishes a connection to the MongoDB database
+// using the connection string specified in the MONGODB_URI environment variable
+// or defaults to a local MongoDB instance if not provided.
+// it uses mongoose.connect method with options to handle deprecation warnings
+// and logs a success message upon successful connection
+// or logs an error message and exits the process if the connection fails.
 
 module.exports = connectDB;
