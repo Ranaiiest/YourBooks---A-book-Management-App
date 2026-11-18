@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logo.png';
 import bookImg from '../assets/book.png';
 import Footer from './Footer';
 
@@ -28,10 +27,6 @@ const Home = () => {
           textAlign: 'center',
         }}
       >
-        {/* Logo at top left */}
-        <div style={{ position: 'absolute', left: 36, top: 32 }}>
-          <img src={logo} alt="YourBooks Logo" style={{ width: 58, borderRadius: '50%' }} />
-        </div>
         {/* Modern headline with colored keyword */}
         <h1 style={{
           fontSize: '3.25rem',

@@ -45,7 +45,7 @@ a {
 
 a:hover,
 a:focus {
-  color: darken(var(--primary-color), 10%);
+  color: #3b7cc2;
 }
 
 /* Buttons */

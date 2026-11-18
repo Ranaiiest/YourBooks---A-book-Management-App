@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
+import { AuthContext } from './context/AuthContext';
 
 import Navbar from './components/Navbar';
 import Dashboard from './components/Dashboard';
@@ -12,8 +13,8 @@ import Signup from './components/Signup';
 import Home from './components/Home';
 
 const PrivateRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/login" />;
+  const { isLoggedIn } = useContext(AuthContext);
+  return isLoggedIn ? children : <Navigate to="/login" />;
 };
 
 const App = () => {

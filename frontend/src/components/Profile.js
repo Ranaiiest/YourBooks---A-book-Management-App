@@ -2,22 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import axios from '../api/api';
 import Avatar from '@mui/material/Avatar';
 
-const defaultProfileImg = 'https://cdn-icons-png.flaticon.com/512/1077/1077012.png'; // Replace with local asset if preferred
+const defaultProfileImg = 'https://cdn-icons-png.flaticon.com/512/1077/1077012.png';
 
 const Profile = () => {
   const [user, setUser] = useState({ name: '', email: '' });
   const [profileImg, setProfileImg] = useState(defaultProfileImg);
-  const fileInputRef = useRef(); // to trigger file input click
-
-  // Q. why use useEffect here? what it doing here?
-  /*
-  the useEffect hook is used here to fetch the user's profile information from the backend API
-  when the component mounts.
-  the useEffect hook runs the fetchUser function, which makes an API call to retrieve the user's
-  profile information.
-  once the data is fetched successfully, it updates the user state with the name and email values.
-  this allows the component to display the user's profile information in the UI.
-  */
+  const fileInputRef = useRef();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -29,7 +19,7 @@ const Profile = () => {
       }
     };
     fetchUser();
-  }, []); // [] ensures this runs once on component mount only once
+  }, []);
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -38,9 +28,6 @@ const Profile = () => {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
-  // here, when a user selects a new image file, this function reads the file
-  // using FileReader and updates the profileImg state with the image data URL
-  // this allows the selected image to be displayed as the profile picture
 
   return (
     <div style={{

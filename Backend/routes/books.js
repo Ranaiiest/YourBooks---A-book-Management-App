@@ -48,6 +48,21 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+// @route   GET /api/books/:id
+// @desc    Get single book by id
+// @access  Private
+router.get('/:id', auth, async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+    if (!book) return res.status(404).json({ msg: 'Book not found' });
+    if (book.user.toString() !== req.user) return res.status(401).json({ msg: 'Not authorized' });
+    res.json(book);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
 // @route   DELETE /api/books/:id
 // @desc    Delete book by id
 // @access  Private
@@ -77,12 +92,12 @@ router.put('/:id', auth, async (req, res) => {
 
     if (book.user.toString() !== req.user) return res.status(401).json({ msg: 'Not authorized' });
 
-    book.title = title || book.title;
-    book.author = author || book.author;
-    book.genre = genre || book.genre;
-    book.rating = rating || book.rating;
-    book.note = note || book.note;
-    book.link = link || book.link;
+    if (title !== undefined && title !== '') book.title = title;
+    if (author !== undefined) book.author = author;
+    if (genre !== undefined) book.genre = genre;
+    if (rating !== undefined) book.rating = rating === '' ? null : rating;
+    if (note !== undefined) book.note = note;
+    if (link !== undefined) book.link = link;
 
     await book.save();
 
